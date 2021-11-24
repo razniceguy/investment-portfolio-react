@@ -9,7 +9,7 @@ class SpotPortfolio extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://localhost:44395/getSpotDetails`)
+        axios.get(`https://investmentportfoliowebapi.azurewebsites.net/getSpotDetails`)
             .then(
                 res => {
                     const spotData = res.data;

@@ -9,7 +9,7 @@ class InterestPortfolio extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://localhost:44395/getInterestDetails`)
+        axios.get(`https://investmentportfoliowebapi.azurewebsites.net/getInterestDetails`)
             .then(
                 res => {
                     const interestData = res.data;

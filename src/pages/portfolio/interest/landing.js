@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table, Container, Row, Col, Stack } from 'react-bootstrap'
+import { Table, Container, Row, Col, Stack } from 'react-bootstrap';
+import Icon from "react-crypto-icons";
+import '../portfolio.css';
 
 class InterestPortfolio extends Component {
 
@@ -29,14 +31,37 @@ class InterestPortfolio extends Component {
         var sec = a.getSeconds();
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
-      }
+    }
+
+    assetMapping = {
+        "ETH":"Ethereum",
+        "BNB":"Binance Coin",
+        "BTC":"Bitcoin",
+        "ADA":"Cardano",
+        "GBP":"British Pounds",
+        "LINK":"Chainlink",
+        "VET":"VeChain",
+        "VTHO":"Vethor",
+        "LDBNB":"Binance Coin",
+        "LDBTC":"Bitcoin",
+        "LDETH":"Ethereum",
+        "LDLINK":"Chainlink",
+        "LDVET":"VeChain",
+    }
+
+    getAssetName(assetShortName) {
+        return(this.assetMapping[assetShortName]);
+    }
 
     renderAssetDetails() {
         return (
             this.state.interestData
             && this.state.interestData.map((item, index) => (
                 <tr key={index}>
-                    <td key={index + 2}>{item.asset}</td>
+                    <td key={index + 2}>
+                        {this.getAssetName(item.asset)}
+                        <Icon class="margin-left-5" name={item.asset.toLowerCase()} size={20} />
+                    </td>
                     <td key={index + 3}>{item.interest}</td>
                     <td key={index + 3}>{this.timeConverter(item.time)}</td>
                     <td key={index + 3}>{item.lendingType}</td>
@@ -67,6 +92,7 @@ class InterestPortfolio extends Component {
                                             {this.renderAssetDetails()}
                                         </tbody>
                                     </Table>
+                                    
                                 </Col>
                             </Row>
                         </Container>
